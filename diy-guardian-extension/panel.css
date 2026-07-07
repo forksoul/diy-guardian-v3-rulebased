@@ -1,0 +1,305 @@
+/* ═══════════════════════════════════════════
+   DIY Guardian — Panel Styles (v2 Gemini)
+   ═══════════════════════════════════════════ */
+
+/* Google Fonts injected via JS */
+
+/* ── Root ── */
+#diy-guardian-root {
+  --bg:      #0a0c10;
+  --surface: #12151c;
+  --surface2:#181d28;
+  --border:  #1e2433;
+  --accent:  #4ade80;
+  --accent2: #22d3ee;
+  --warn:    #facc15;
+  --danger:  #f87171;
+  --text:    #e2e8f0;
+  --muted:   #64748b;
+  --radius:  10px;
+
+  font-family: 'Outfit', 'Segoe UI', sans-serif;
+  color: var(--text);
+  box-sizing: border-box;
+}
+#diy-guardian-root * { box-sizing: border-box; }
+
+/* ── Toggle Tab ── */
+#dg-tab {
+  position: fixed;
+  top: 130px; right: 0;
+  width: 30px; height: 80px;
+  background: linear-gradient(180deg, var(--accent), var(--accent2));
+  border-radius: 8px 0 0 8px;
+  cursor: pointer;
+  z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  writing-mode: vertical-rl;
+  font-size: 9px; font-weight: 700;
+  color: #050709;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  font-family: 'IBM Plex Mono', monospace;
+  box-shadow: -3px 0 16px rgba(74,222,128,.25);
+  transition: width .2s;
+  user-select: none;
+}
+#dg-tab:hover { width: 34px; }
+
+/* ── Panel ── */
+#dg-panel {
+  position: fixed;
+  top: 70px; right: 0;
+  width: 350px;
+  max-height: calc(100vh - 90px);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-right: none;
+  border-radius: 14px 0 0 14px;
+  z-index: 9998;
+  display: flex; flex-direction: column;
+  box-shadow: -6px 0 40px rgba(0,0,0,.6);
+  transition: transform .35s cubic-bezier(.4,0,.2,1);
+  overflow: hidden;
+}
+#dg-panel.hidden { transform: translateX(352px); }
+
+/* ── Panel Header ── */
+#dg-head {
+  background: linear-gradient(135deg, #0f1620, var(--bg));
+  padding: 13px 15px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.dg-logo {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 800; letter-spacing: -.3px;
+}
+.dg-logo-icon {
+  width: 30px; height: 30px; border-radius: 7px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.dg-powered {
+  font-size: 9px; color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: .8px;
+}
+#dg-btn-analyze {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border: none; border-radius: 7px;
+  padding: 7px 13px;
+  color: #050709; font-family: 'Outfit', sans-serif;
+  font-weight: 700; font-size: 11px; cursor: pointer;
+  transition: opacity .2s, transform .1s;
+  white-space: nowrap;
+}
+#dg-btn-analyze:hover   { opacity: .85; }
+#dg-btn-analyze:active  { transform: scale(.96); }
+#dg-btn-analyze:disabled { opacity: .45; cursor: not-allowed; }
+
+/* ── Scrollable body ── */
+#dg-body {
+  overflow-y: auto; flex: 1; padding: 13px;
+  scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+}
+#dg-body::-webkit-scrollbar { width: 4px; }
+#dg-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* ── States ── */
+#dg-placeholder, #dg-loading {
+  text-align: center; padding: 32px 16px; color: var(--muted);
+}
+.dg-big-icon { font-size: 44px; opacity: .45; margin-bottom: 12px; }
+#dg-placeholder p, #dg-loading p { font-size: 12px; line-height: 1.7; }
+#dg-loading { display: none; }
+
+.dg-spinner {
+  width: 34px; height: 34px; margin: 0 auto 14px;
+  border: 3px solid var(--border); border-top-color: var(--accent);
+  border-radius: 50%; animation: dg-spin .75s linear infinite;
+}
+@keyframes dg-spin { to { transform: rotate(360deg); } }
+
+.dg-loading-sub {
+  font-size: 10px; color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  margin-top: 6px; letter-spacing: .5px;
+}
+
+/* ── Error banner ── */
+#dg-error {
+  display: none;
+  background: rgba(248,113,113,.08);
+  border: 1px solid rgba(248,113,113,.25);
+  border-radius: var(--radius);
+  padding: 11px 13px;
+  font-size: 12px; color: var(--danger); line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* ── Cards ── */
+.dg-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 13px;
+  margin-bottom: 10px;
+}
+.dg-card-title {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--accent2); margin-bottom: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* ── Summary banner ── */
+.dg-summary-text {
+  font-size: 12px; color: #94a3b8; line-height: 1.7;
+}
+.dg-category-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(34,211,238,.1); border: 1px solid rgba(34,211,238,.2);
+  border-radius: 20px; padding: 3px 10px;
+  font-size: 10px; color: var(--accent2); font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* ── Dual meters row ── */
+.dg-meters-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  margin-bottom: 10px;
+}
+.dg-meter-box {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 11px 12px;
+}
+.dg-meter-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; font-family: 'IBM Plex Mono', monospace;
+  color: var(--muted); margin-bottom: 7px;
+  display: flex; align-items: center; gap: 5px;
+}
+.dg-meter-value {
+  font-size: 16px; font-weight: 800; margin-bottom: 6px;
+}
+.dg-meter-value.mudah    { color: var(--accent); }
+.dg-meter-value.sederhana{ color: var(--warn); }
+.dg-meter-value.sukar    { color: var(--danger); }
+.dg-meter-value.rendah   { color: var(--accent); }
+.dg-meter-value.tinggi   { color: var(--danger); }
+
+.dg-bar {
+  height: 6px; background: var(--border); border-radius: 3px; overflow: hidden;
+}
+.dg-bar-fill {
+  height: 100%; border-radius: 3px;
+  transition: width .9s cubic-bezier(.4,0,.2,1);
+}
+/* Difficulty fill */
+.dg-bar-fill.mudah     { background: linear-gradient(90deg,#4ade80,#86efac); width:33%; }
+.dg-bar-fill.sederhana { background: linear-gradient(90deg,#facc15,#fde68a); width:66%; }
+.dg-bar-fill.sukar     { background: linear-gradient(90deg,#f87171,#fca5a5); width:100%;}
+/* Risk fill */
+.dg-bar-fill.rendah    { background: linear-gradient(90deg,#4ade80,#86efac); width:25%; }
+.dg-bar-fill.risiko-sederhana { background: linear-gradient(90deg,#facc15,#fde68a); width:60%; }
+.dg-bar-fill.tinggi    { background: linear-gradient(90deg,#f87171,#fca5a5); width:100%;}
+
+/* ── Alerts ── */
+.dg-alert {
+  display: flex; gap: 9px;
+  padding: 8px 10px; border-radius: 8px;
+  margin-bottom: 7px; font-size: 12px; line-height: 1.55;
+}
+.dg-alert:last-child { margin-bottom: 0; }
+.dg-alert.danger  { background:rgba(248,113,113,.08); border:1px solid rgba(248,113,113,.22); border-left:3px solid var(--danger); }
+.dg-alert.warning { background:rgba(250,204,21,.08);  border:1px solid rgba(250,204,21,.22);  border-left:3px solid var(--warn);   }
+.dg-alert.info    { background:rgba(34,211,238,.07);  border:1px solid rgba(34,211,238,.2);   border-left:3px solid var(--accent2); }
+.dg-alert.safe    { background:rgba(74,222,128,.07);  border:1px solid rgba(74,222,128,.2);   border-left:3px solid var(--accent);  }
+.dg-alert-icon    { font-size:15px; flex-shrink:0; margin-top:1px; }
+.dg-alert-text    { color:#cbd5e1; }
+
+/* ── PPE Grid ── */
+.dg-ppe-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+}
+.dg-ppe-item {
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 7px; padding: 7px 10px;
+  font-size: 11px; color: #94a3b8;
+  display: flex; align-items: center; gap: 7px;
+}
+.dg-ppe-item.req {
+  border-color: rgba(248,113,113,.35);
+  background: rgba(248,113,113,.05);
+  color: #fca5a5;
+}
+.dg-ppe-emoji { font-size: 15px; }
+
+/* ── Steps checklist ── */
+.dg-steps { list-style: none; }
+.dg-step {
+  display: flex; align-items: flex-start; gap: 9px;
+  padding: 7px 0; border-bottom: 1px solid var(--border);
+  font-size: 12px; color: #94a3b8; line-height: 1.55;
+  cursor: pointer; transition: color .15s;
+}
+.dg-step:last-child { border-bottom: none; }
+.dg-step.done { color: var(--muted); text-decoration: line-through; }
+.dg-step-num {
+  min-width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700;
+  color: var(--muted); font-family: 'IBM Plex Mono', monospace;
+  flex-shrink: 0; transition: all .2s;
+}
+.dg-step.done .dg-step-num {
+  background: var(--accent); border-color: var(--accent);
+  color: #050709; font-size: 11px;
+}
+
+/* ── Rating ── */
+.dg-stars {
+  display: flex; gap: 7px; justify-content: center; margin: 8px 0 5px;
+}
+.dg-star {
+  font-size: 24px; cursor: pointer;
+  filter: grayscale(1) brightness(.45);
+  transition: filter .15s, transform .15s;
+}
+.dg-star.on, .dg-star:hover { filter: none; transform: scale(1.15); }
+.dg-rating-label {
+  text-align: center; font-size: 11px; color: var(--muted); min-height: 16px;
+}
+
+/* ── Notes ── */
+#dg-notes {
+  width: 100%; background: var(--surface2);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px; color: var(--text);
+  font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+  resize: none; height: 80px; outline: none; line-height: 1.65;
+  transition: border-color .2s;
+}
+#dg-notes:focus { border-color: var(--accent); }
+#dg-notes::placeholder { color: #2d3748; }
+
+#dg-save-note {
+  width: 100%; margin-top: 7px; padding: 8px;
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 7px; color: var(--muted);
+  font-size: 11px; cursor: pointer; font-family: 'Outfit', sans-serif;
+  transition: all .2s;
+}
+#dg-save-note:hover { background: var(--border); color: var(--text); }
+#dg-save-note.saved { color: var(--accent); border-color: rgba(74,222,128,.3); }
+
+/* ── Not DIY ── */
+.dg-not-diy {
+  text-align: center; padding: 20px 10px; color: var(--muted);
+}
+.dg-not-diy .big { font-size: 38px; opacity: .4; margin-bottom: 10px; }
+.dg-not-diy p    { font-size: 12px; line-height: 1.7; }
