@@ -1,5 +1,3 @@
-# diy-guardian-v3-rulebased
-Projek ini merupakan sebuah pembangunan artifak teknologi berbentuk Chrome Extension bernama DIY Guardian. Ia dibangunkan bertujuan untuk menjadi alat sokongan pembelajaran kendiri serta sistem penilaian keselamatan masa nyata (real-time) khusus untuk penonton video Do-It-Yourself (DIY) di platform YouTube
 # DIY Guardian v3.0 🛡️
 
 DIY Guardian ialah sebuah **Chrome Extension** berasaskan sistem *rule-based* yang dibina untuk menganalisis dan menilai keselamatan video DIY di YouTube secara masa nyata (*real-time*). Projek ini dibangunkan sebagai produk inovasi bagi **Projek Penyelidikan I/II (CFT3124), Fakulti Teknologi Kreatif dan Warisan (FTKW), Universiti Malaysia Kelantan**.
